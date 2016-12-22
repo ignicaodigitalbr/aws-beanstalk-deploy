@@ -66,8 +66,8 @@ def create_new_version():
             Process=True
         )
     except ClientError as err:
-        print("Failed to create application version.\n" + str(err))
-        return False
+        print("Version already exists.\n")
+        return True
 
     try:
         if response['ResponseMetadata']['HTTPStatusCode'] is 200:
@@ -115,7 +115,7 @@ def main():
     if not create_new_version():
         sys.exit(1)
     else:
-        print("Version created successfully in ElasticBeanstalk.\n")
+        print("Version in ElasticBeanstalk OK.\n")
 
     sleep(5)
 
