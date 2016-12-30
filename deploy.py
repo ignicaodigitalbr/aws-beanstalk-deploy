@@ -13,7 +13,7 @@ TAG = commands.getoutput("git describe --match='v*-dev' --tags --abbrev=0")
 COMMIT_DESCRIPTION = commands.getoutput("git log --oneline -n1")
 BUILD_NAME = APP_NAME + "-" + TAG + ".zip"
 BUILD_FILE_LOCATION = "/tmp/" + BUILD_NAME
-BUCKET_KEY = os.getenv('EB_APPLICATION_NAME') + '/' + BUILD_NAME
+BUCKET_KEY = os.getenv('APPLICATION_NAME') + '/' + BUILD_NAME
 
 def create_build(version):
     global BUILD_FILE_LOCATION
