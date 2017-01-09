@@ -13,7 +13,7 @@ TAG = commands.getoutput("git describe --match='v*-dev' --tags --abbrev=0")
 COMMIT_DESCRIPTION = commands.getoutput("git log --oneline -n1")
 BUILD_NAME = APP_NAME + "-" + TAG + ".zip"
 BUILD_FILE_LOCATION = "/tmp/" + BUILD_NAME
-BUCKET_KEY = os.getenv('APPLICATION_NAME') + '/' + BUILD_NAME
+BUCKET_KEY = os.getenv('EB_APPLICATION_NAME') + '/' + BUILD_NAME
 
 def create_build(version):
     global BUILD_FILE_LOCATION
@@ -22,6 +22,9 @@ def create_build(version):
     return True
 
 def upload_to_s3(artifact):
+    global BUCKET_KEY
+    global BUILD_NAME
+
     print("Uploading the build file to s3 bucket...")
 
     try:
@@ -46,6 +49,10 @@ def upload_to_s3(artifact):
     return True
 
 def create_new_version():
+    global BUCKET_KEY
+    global BUILD_NAME
+    global COMMIT_DESCRIPTION
+
     print("Creating ElasticBeanstalk Application Version...")
 
     try:
@@ -80,6 +87,8 @@ def create_new_version():
         return False
 
 def deploy_new_version():
+    global BUILD_NAME
+
     print("Deploying the new version...")
 
     try:
@@ -98,7 +107,6 @@ def deploy_new_version():
         print("Failed to update environment.\n" + str(err))
         return False
 
-    #print(response)
     return True
 
 def main():
