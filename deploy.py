@@ -118,12 +118,12 @@ def main():
     if not upload_to_s3(BUILD_FILE_LOCATION):
         sys.exit(1)
     else:
-        print("Build file "+ BUILD_NAME + " upload successfully in bucket.\n")
+        print("Build file "+ BUILD_NAME + " upload successfully to bucket.\n")
 
     if not create_new_version():
         sys.exit(1)
     else:
-        print("Version in ElasticBeanstalk OK.\n")
+        print("ElasticBeanstalk Version was not deployed, already existent version.\n")
 
     sleep(5)
 
