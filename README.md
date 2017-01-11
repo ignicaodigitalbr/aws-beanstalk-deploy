@@ -3,7 +3,7 @@ Automated deploy for AWS ElasticBeanstalk through bitbucket pipelines.
 
 ## Requirements
 To use that script you will need to use a bitbucket pipeline.
-We use release branchs to deploy our applications following a default style: `release-v0.0.0.0-prod` and producing `v0.0.0.0-prod` as deployed version.
+We use release branchs to deploy our applications using a release branch for staging: `release-v0.0.0-prod` and for production using a specific tag in master branch: `v0.0.0-prod` 
 Some environment variables are required to upload our application:
 * `EB_APPLICATION_NAME` that is your application name
 * `EB_APPLICATION_ENVIRONMENT` that is your ElasticBeanstalk environment
