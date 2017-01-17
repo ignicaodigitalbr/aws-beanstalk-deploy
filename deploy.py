@@ -9,9 +9,10 @@ import commands
 from botocore.exceptions import ClientError
 
 APP_NAME = os.getenv('BITBUCKET_REPO_SLUG')
+COMMIT_HASH = os.getenv('BITBUCKET_COMMIT')
 TAG = commands.getoutput("git symbolic-ref HEAD | cut -d/ -f3- | sed -e 's/release\-//'")
 COMMIT_DESCRIPTION = commands.getoutput("git log --oneline -n1")
-BUILD_NAME = APP_NAME + "-" + TAG + ".zip"
+BUILD_NAME = APP_NAME + "-" + TAG + "-" + COMMIT_HASH + ".zip"
 BUILD_FILE_LOCATION = "/tmp/" + BUILD_NAME
 BUCKET_KEY = os.getenv('EB_APPLICATION_NAME') + '/' + BUILD_NAME
 
